@@ -35,11 +35,11 @@ $S^2 = \frac{1}{n-1}\sum(X_i-\bar X)^2,~E(S^2)=\sigma^2$
 
 #### 1.3 t 分布
 
-$U\sim N(0,1), V \sim \chi^2_{n-1}$, $\bot V$ 那么$\frac{U}{\sqrt{\frac{V}{n-1}}} \sim t_{n-1}$
+$$U\sim N(0,1),V \sim \chi^2_{n-1}, U \bot V \text {那么 } \frac{U}{\sqrt{\frac{V}{n-1}}} \sim t_{n-1}$$
 
 #### 1.4 F 分布
 
-如果$A \sim \chi^2_p, B \sim \chi^2_q, A \bot B$ 那么$\frac{A/p}{B/q} \sim F_{p,q}$
+$$ \text{如果}A\sim \chi^2_p, B \sim \chi^2_q, A \bot B \text{ 那么 }\frac{A/p}{B/q} \sim F_{p,q}$$
 
 ### 2.点估计
 
@@ -123,6 +123,8 @@ $$\pi_{\theta \mid x}(\theta \mid x)=\frac{f_{X\mid\theta}(x \mid \theta)\pi(\th
 **Pivot**
 
 A random variable $Q(X,\theta)$ of $X$ and $\theta$ is called a pivot if the distribution of $Q$ does not involve $\theta$. Such functions Q are called pivot.
+
+
 
 
 
