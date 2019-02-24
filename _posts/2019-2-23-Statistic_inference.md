@@ -34,10 +34,10 @@ $S^2 = \frac{1}{n-1}\sum(X_i-\bar X)^2,~E(S^2)=\sigma^2$
 
 #### 1.3 t 分布
 
-$U \sim N(0,1), V \sim \chi^2_{n-1}, U \bot V,\text{那么}\frac{U}{\sqrt{\frac{V}{n-1}}} \sim t_{n-1}$
+$U \sim N(0,1), V \sim \chi^2_{n-1}, U  V,\text{那么}\frac{U}{\sqrt{\frac{V}{n-1}}} \sim t_{n-1}$
 
 #### 1.4 F 分布
-如果$A \sim \chi^2_p, B \sim \chi^2_q, A \bot B, \text{那么}\frac{A/p}{B/q} \sim F_{p,q}$
+如果$A \sim \chi^2_p, B \sim \chi^2_q, A  B, \text{那么}\frac{A/p}{B/q} \sim F_{p,q}$
 
 ### 2.点估计
 
@@ -108,6 +108,22 @@ $$\pi_{\theta \mid x}(\theta \mid x)=\frac{f_{X\mid\theta}(x \mid \theta)\pi(\th
 
 ### 3.置信区间
 
+#### 3.1 定义
+
+设$\theta$是总体的一个参数,其参数空间为$\Theta$, $x_1,\dots,x_n$是来自该总体的样本, 对给定的一个$\alpha$(0<$\alpha$<1), 假设有两个统计量$L = L(X_1,\dots,X_n)$, $U = U(X_1,\dots,X_n)$, 若对任意的$\theta \in \Theta$, 有$P_\theta(L \leq \theta \leq U) \geq 1 - \alpha$,则称[L,U]为$\theta$的置信水平为$1-\alpha$的置信区间。
+
+**Remark:**
+
+- 这里需要注意的是这里的L，U都是随机数，因为他们是基于随机数的统计量。$\theta$是一个未知的定值（真实值）。一旦产生了样本,我们可以将L，U对于这次样本的值代入，比如得到的0.95置信区间是[3.2,5.5]。这不是意味着$3.2\leq \theta \leq 5.5$的概率是0.95. 而是意味着我们如果能抽取100次这样的样本，那么我们得到的置信区间大致有95次捕捉到真实的$\theta$（或者每次这样的样本产生的L，U， 我们有95%把握真实$\theta$在L，U之间）.
+
+#### 3.2 构建置信区间
+
+**Pivot**
+
+A random variable $Q(X,\theta)$ of $X$ and $\theta$ is called a pivot if the distribution of $Q$ does not involve $\theta$. Such functions Q are called pivot.
+
+
+
 ### 4.假设检验
 
 假设检验通常包括以下几方面：
@@ -126,7 +142,9 @@ $$\pi_{\theta \mid x}(\theta \mid x)=\frac{f_{X\mid\theta}(x \mid \theta)\pi(\th
 |Not Reject $H_0$|正确|Type II Error|
 
 - 犯第一类错误的概率$\alpha = P_\theta(X \in R), \theta \in \Theta_0$
-- 犯第二类错误的概率$\Beta = 1- P_\theta(X \in R), \theta \in \Theta_1$
+- 犯第二类错误的概率$\beta = 1- P_\theta(X \in R), \theta \in \Theta_1$
+- 本文后面会讲到，我们一般控制第一类错误率在一定范围内(比如0.05)。 这是一种为了保护原假设的行为，所以我们一般会把一些我们想要去保护的结论作为原假设，比如'这个药没有效果'或者是'这个嫌疑人无罪'。因为一般来说错误的接受‘这个药有效果’或者‘嫌疑人有罪’会带来极大的损失。所以除非我们有极大的证据证明这个嫌疑人有罪，不然我们就不会给他定罪，这就是前面所说的保护原假设的一种解读。
+- 另一种思想就是要把你想去证明的放在备择假设想。意思就是只有你有极大的证据证明你的结论是正确的，才会拒绝原假设。
 
 **Power Function**
 
@@ -176,16 +194,16 @@ The null hypothesis is conveniently expressed as an intersection, say $H_0:\thet
 
 Consider testing $H_0: \theta = \theta_0 \text{ versus } H_1: \theta = \theta_1$. A test with rejection region R is a UMP level $\alpha$ test if and only if
 
-- $x \in R \text{~if~} f(x\mid \theta_1) > kf(x \mid \theta_0)$  and  $x \in R^c \text{~if~} f(x\mid \theta_1) < kf(x \mid \theta_0)$ for some k $\geq 0$
+- $x \in R \text{ if } f(x\mid \theta_1) > kf(x \mid \theta_0)$  and  $x \in R^c \text{ if } f(x\mid \theta_1) < kf(x \mid \theta_0)$ for some k $\geq 0$
 - $\alpha = P_{\theta_0}(X \in R)$  
 
 **引理**
 
 Suppose $T(x)$ is a sufficient statistic for $\theta$ and $g(t \mid \theta_i)$ is the pdf or pmf of T corresponding to $\theta_i$, i=0,1. Then any test based on T with rejection region S is a UMP level $\alpha$ test if it satisfies 
 
-- $t \in S ~~~if~~~ g(t \mid \theta_1) > kg(t \mid \theta_0)$
+- $t \in S \text{ if } g(t \mid \theta_1) > kg(t \mid \theta_0)$
 
-- $t \in S^c ~~if~~ g(t \mid \theta_1) < kg(t \mid \theta_0)$
+- $t \in S^c \text{ if } g(t \mid \theta_1) < kg(t \mid \theta_0)$
 - for some k $\geq 0$, where $\alpha = P_{\theta_0}(T \in S)$
 ##### 4.2.5
 
@@ -193,31 +211,31 @@ Suppose $T(x)$ is a sufficient statistic for $\theta$ and $g(t \mid \theta_i)$ i
 
 Example(UMP normal test):
 
-Let $X_1,\dots,X_n$ be a random sample from a $n(\theta,\sigma^2)$ population, $\sigma^2$ known. The sample mean $\bar X$ is a sufficient statistic for $\theta$. Considering testing $H_0: \theta = \theta_0 \text{~versus~} H_1: \theta = \theta_1 \text{~where~} \theta_0 > \theta_1$.
+Let $X_1,\dots,X_n$ be a random sample from a $n(\theta,\sigma^2)$ population, $\sigma^2$ known. The sample mean $\bar X$ is a sufficient statistic for $\theta$. Considering testing $H_0: \theta = \theta_0 \text{ versus } H_1: \theta = \theta_1 \text{ where } \theta_0 > \theta_1$.
 
-$g(\bar x \mid \theta_1) > kg(\bar x | \theta_0)$, is equivalent to $\bar X < \frac{(2\sigma^2\log k)/n - \theta_0^2 + \theta_1^2}{2(\theta_1 - \theta_0)}$. It means that the test with rejection region $\bar X < c$ is the UMP level $\alpha$ test, where $\alpha = P_{\theta_0}(\bar X < c)$. Actually, $P_{\theta_0}(\bar X < c) = P_{\theta_0}(\frac{\bar X - \theta_0}{\sqrt{\sigma^2/n}} < c')$. It only depends on $\theta_0$. So we can replace $H_1$ by $H_1 :\theta \geq \theta _0$
+$g(\bar x \mid \theta_1) > kg(\bar x \mid \theta_0)$, is equivalent to $\bar X < \frac{(2\sigma^2\log k)/n - \theta_0^2 + \theta_1^2}{2(\theta_1 - \theta_0)}$. It means that the test with rejection region $\bar X < c$ is the UMP level $\alpha$ test, where $\alpha = P_{\theta_0}(\bar X < c)$. Actually, $P_{\theta_0}(\bar X < c) = P_{\theta_0}(\frac{\bar X - \theta_0}{\sqrt{\sigma^2/n}} < c')$. It only depends on $\theta_0$. So we can replace $H_1$ by $H_1 :\theta \geq \theta _0$
 
 #### 4.3 定义
 
 ##### 4.3.1 unbiased test
 
-A test with power function $\Beta(\theta)$ is unbiased if $\beta(\theta') \geq \beta(\theta'')$ for every $\theta' \in \Theta_0^c$ and $\theta'' \in \Theta_0$
+A test with power function $\beta(\theta)$ is unbiased if $\beta(\theta') \geq \beta(\theta'')$ for every $\theta' \in \Theta_0^c$ and $\theta'' \in \Theta_0$
 
 ##### 4.3.2 Most Powerful Tests
 
-Let $C$ be a class of tests for testing $H_0: \theta \in \Theta_0 \text{versus~} H_1:\theta \in \Theta_0^c$. A test in class $C$, with power function $\beta(\theta)$ is a **uniformly most powerful(UMP)** class $C$ test if $\beta(\theta) \geq \beta'(\theta)$ for every $\theta \in \Theta_0^c$ and every $\beta'(\theta)$ that is a power function of a test in class $C$.
+Let $C$ be a class of tests for testing $H_0: \theta \in \Theta_0 \text{ versus } H_1:\theta \in \Theta_0^c$. A test in class $C$, with power function $\beta(\theta)$ is a **uniformly most powerful(UMP)** class $C$ test if $\beta(\theta) \geq \beta'(\theta)$ for every $\theta \in \Theta_0^c$ and every $\beta'(\theta)$ that is a power function of a test in class $C$.
 
 Generally, the class $C$ will be the class of all level $\alpha$ tests. It's called a UMP level $\alpha$ test.
 
 ##### monotone likelihood ratio(MLR)
 
-A family of pdfs or pmfs {$g(t \mid \theta):\theta \in \Theta$} for a univariate random variable T with real-valued parameter $\theta$ has a monotone likelihood ratio(MLR) if , for every $\theta_2 > \theta_1$, $g(t\mid \theta_2) / g(t \mid \theta_1)$ is a monotone (nonincreasing or nondecreasing) function of t on {$t:g(t \mid \theta_1)>0 \text{~or~} g(t\mid \theta_2) > 0$} 
+A family of pdfs or pmfs {$g(t \mid \theta):\theta \in \Theta$} for a univariate random variable T with real-valued parameter $\theta$ has a monotone likelihood ratio(MLR) if , for every $\theta_2 > \theta_1$, $g(t\mid \theta_2) / g(t \mid \theta_1)$ is a monotone (nonincreasing or nondecreasing) function of t on {$t:g(t \mid \theta_1)>0 \text{ or } g(t\mid \theta_2) > 0$} 
 
 Any regular exponential family with $g(t \mid \theta) = h(t)c(\theta)e^{w(\theta)t}$ has an MLR if $w(\theta)$ is monotone.
 
 **Karlin-Rubin定理**
 
-Consider testing $H_0:\theta \leq \theta_0 \text{~versus~} H_1: \theta > \theta_0$. Suppose that T is a sufficient statistic for $\theta$ and the family of pdfs or pmfs {$g(t\mid\theta): \theta \in \Theta$} of T has an MLR. Then for any $t_0$, the test that rejects $H_0$ if and only if $T > t_0$ is a UMP level $\alpha$ test, where $\alpha = P_{\theta_0}(T > t_0)$.
+Consider testing $H_0:\theta \leq \theta_0 \text{ versus } H_1: \theta > \theta_0$. Suppose that T is a sufficient statistic for $\theta$ and the family of pdfs or pmfs {$g(t\mid\theta): \theta \in \Theta$} of T has an MLR. Then for any $t_0$, the test that rejects $H_0$ if and only if $T > t_0$ is a UMP level $\alpha$ test, where $\alpha = P_{\theta_0}(T > t_0)$.
 
 If $H_0: \theta \geq \theta_0$ and of $H_1: \theta < \theta_0$ if and only if $T < t_0$ is a UMP level $\alpha = P_{\theta_0}(T < t_0)$ test.
 #### 5 充分统计量
