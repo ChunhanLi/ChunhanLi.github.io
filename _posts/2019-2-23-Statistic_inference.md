@@ -124,9 +124,25 @@ $$\pi_{\theta \mid x}(\theta \mid x)=\frac{f_{X\mid\theta}(x \mid \theta)\pi(\th
 
 A random variable $Q(X,\theta)$ of $X$ and $\theta$ is called a pivot if the distribution of $Q$ does not involve $\theta$. Such functions Q are called pivot.
 
+##### 3.2.1 常见pivots
 
+$X_1,\dots,X_n \sim N(\mu,\sigma^2)$
 
+1. C.I. for $\mu$. $\sigma^2$ is known.
 
+$$\frac{\bar X - \mu}{\sigma/\sqrt{n}} \sim N(0,1)$$
+
+2. C.I. for $\mu$. $\sigma^2$ is unknown.
+
+$$\frac{\bar X - \mu}{S/\sqrt{n}} \sim t_{n-1}$$
+
+3. C.I. for $\sigma^2$. $\mu$ known.
+
+$$\sum_i(\frac{X_i -\mu}{\sigma})^2 \sim \chi^2_n$$
+
+4. C.I. for $\sigma^2$. $\mu$ is unknown.
+
+$$\sum_i(\frac{X_i -\bar X}{\sigma})^2 \sim \chi^2_{n-1}$$
 
 ### 4.假设检验
 
@@ -209,6 +225,7 @@ Suppose $T(x)$ is a sufficient statistic for $\theta$ and $g(t \mid \theta_i)$ i
 
 - $t \in S^c \text{ if } g(t \mid \theta_1) < kg(t \mid \theta_0)$
 - for some k $\geq 0$, where $\alpha = P_{\theta_0}(T \in S)$
+
 ##### 4.2.5
 
 由上述定理可以延伸到(simple to composite)
@@ -218,6 +235,32 @@ Example(UMP normal test):
 Let $X_1,\dots,X_n$ be a random sample from a $n(\theta,\sigma^2)$ population, $\sigma^2$ known. The sample mean $\bar X$ is a sufficient statistic for $\theta$. Considering testing $H_0: \theta = \theta_0 \text{ versus } H_1: \theta = \theta_1 \text{ where } \theta_0 > \theta_1$.
 
 $g(\bar x \mid \theta_1) > kg(\bar x \mid \theta_0)$, is equivalent to $\bar X < \frac{(2\sigma^2\log k)/n - \theta_0^2 + \theta_1^2}{2(\theta_1 - \theta_0)}$. It means that the test with rejection region $\bar X < c$ is the UMP level $\alpha$ test, where $\alpha = P_{\theta_0}(\bar X < c)$. Actually, $P_{\theta_0}(\bar X < c) = P_{\theta_0}(\frac{\bar X - \theta_0}{\sqrt{\sigma^2/n}} < c')$. It only depends on $\theta_0$. So we can replace $H_1$ by $H_1 :\theta \geq \theta _0$
+
+##### 4.2.6 Asymptotic distribution of the LRT---simple $H_0$
+
+For testing $H_0:\theta = \theta_0 \text{ versus } H_1:\theta \neq \theta_0$. Suppose $X_1,\dots, X_n$ are iid $f(x \mid \theta)$, $\hat \theta$ is the MLE of $\theta$. And $f(x \mid \theta)$ satisfies the some regularity conditions. Then under $H_0$, as $n \rightarrow \infty$,
+
+$$-2\log \lambda(X) \rightarrow \chi_1^2 \text{ in distribution}$$
+
+**one more**
+
+![image](https://github.com/ChunhanLi/ChunhanLi.github.io/blob/master/img/dayangbei.png?raw=true)
+
+Note:这里的分位数定义和我平常习惯的不一样。所以这里改成$\chi^2_{v,1\alpha}$.
+
+**Example: 证明筛子是均匀的**
+
+The result of dice is distributed by Multinomial distribution. Let $\theta = (p_1,\dots,p_6)$. $P_{\theta}(X_i = j) = p_j$. Thus the pmf of $X_i$ is $f(j \mid \theta) = p_j$. And the likelihood function is $L(\theta \mid x) = \prod_{i=1}^nf(x_i \mid \theta) = p_1^{y_1}p_2^{y_2}p_3^{y_3}p_4^{y_4}p_5^{y_5}p_6^{y_6}$ where $y_j= \text{ number } of x_1,\dots,x_n \text{ equal to j}$.
+
+Consider testing 
+
+$$H_0: p_1 = p_2 = p_3 = p_4 = p_5 = p_6 \text{ versus }  H_1:H_0 \text{ is not true}$$
+
+In this case, $v = 5 -0 =5$. Then, calculate $\lambda(x)$. The MLE of $p_j$ under $\Theta$ is $\hat p_j = y_j/n$. So,
+
+$$\lambda(x) = (\frac{n}{6y_1})^{y_1}\dots(\frac{n}{6y_6})^{y_6}$$
+
+The asymptotic size $\alpha$ test rejects $H_0$ if $-2\log \lambda(x) \geq \chi^2_{5, 0.95}$. Make sure that n is large enough.
 
 #### 4.3 定义
 
