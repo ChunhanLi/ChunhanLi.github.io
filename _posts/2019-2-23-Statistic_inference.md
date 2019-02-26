@@ -246,7 +246,7 @@ $$-2\log \lambda(X) \rightarrow \chi_1^2 \text{ in distribution}$$
 
 ![image](https://github.com/ChunhanLi/ChunhanLi.github.io/blob/master/img/dayangbei.png?raw=true)
 
-Note:这里的分位数定义和我平常习惯的不一样。所以这里改成$\chi^2_{v,1\alpha}$.
+Note:这里的分位数定义和我平常习惯的不一样。所以这里改成$\chi^2_{v,1-\alpha}$.
 
 **Example: 证明筛子是均匀的**
 
