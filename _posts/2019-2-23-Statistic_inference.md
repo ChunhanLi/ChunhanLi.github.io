@@ -5,7 +5,7 @@ subtitle:   概率论与数理统计
 date:       2019-2-23
 author:     Midone
 header-img: img/post-bg-re-vs-ng2.jpg
-catalog: false
+catalog: True
 tags:
     - 统计基础
 ---

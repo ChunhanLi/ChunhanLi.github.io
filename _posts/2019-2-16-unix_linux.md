@@ -5,7 +5,7 @@ subtitle:   unix/linux
 date:       2019-2-16
 author:     Midone
 header-img: img/post-bg-re-vs-ng2.jpg
-catalog: false
+catalog: True
 tags:
     - 编程语言
 ---
