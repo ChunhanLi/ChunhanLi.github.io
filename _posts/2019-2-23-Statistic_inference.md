@@ -285,19 +285,20 @@ Any regular exponential family with $g(t \mid \theta) = h(t)c(\theta)e^{w(\theta
 Consider testing $H_0:\theta \leq \theta_0 \text{ versus } H_1: \theta > \theta_0$. Suppose that T is a sufficient statistic for $\theta$ and the family of pdfs or pmfs {$g(t\mid\theta): \theta \in \Theta$} of T has an MLR. Then for any $t_0$, the test that rejects $H_0$ if and only if $T > t_0$ is a UMP level $\alpha$ test, where $\alpha = P_{\theta_0}(T > t_0)$.
 
 If $H_0: \theta \geq \theta_0$ and of $H_1: \theta < \theta_0$ if and only if $T < t_0$ is a UMP level $\alpha = P_{\theta_0}(T < t_0)$ test.
-#### 5 充分统计量
+
+### 5 充分统计量
 
 本来不想提这个的，但是定理要用的，还是小记录一哈吧。
 
-##### 5.1 定义
+#### 5.1 定义
 
 A statistic $T(X_n)$ is called a sufficient statistic for $\theta$, if the conditional distribution of $X_n=(X_1, \dots, X_n)$ given $T=t$ does not depend on $\theta$.
 
-##### 5.2 Fisher-Neymann Factorization Theorem
+#### 5.2 Fisher-Neymann Factorization Theorem
 
 A statistic $T(X_1,\dots,X_n)$ is sufficient for $\theta$ if and only if $f_n(x_n \mid \theta) = g(T(x_n) \mid \theta)h(x_n)$, where $h$ does not depend on $\theta$ and g depends on $x_n$ only through $T(x_n)$.
 
-##### 5.3 Exponential family
+#### 5.3 Exponential family
 
 An exponential family of distribution $f(x \mid \theta) = h(x)c(\theta)e^{\sum_{j=1}^kw_j(\theta)T_j(x)}$. Then $T(x_n) = (\sum_{i=1}^nT_1(X_i),\dots,\sum_{i=1}^nT_k(X_i))$
 
