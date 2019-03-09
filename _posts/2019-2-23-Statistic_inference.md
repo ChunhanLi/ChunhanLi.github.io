@@ -28,7 +28,7 @@ $S^2 = \frac{1}{n-1}\sum(X_i-\bar X)^2,~E(S^2)=\sigma^2$
 
 - $E(\chi_k^2)=k, Var(\chi_k^2)=2k$
 
-- k个独立的标准正态随机数的和的分布即为卡方k. 
+- k个独立的标准正态随机数的和的分布即为卡方k.
 
 - 对于正态分布，$\frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1},~~ \bar X \bot S^2$
 
@@ -184,6 +184,8 @@ $\beta(\theta)=P_\theta(X \in R)$
 
 **P-value**
 ![image](https://github.com/ChunhanLi/ChunhanLi.github.io/blob/master/img/p-value.png?raw=true)
+
+ ![image](https://github.com/ChunhanLi/ChunhanLi.github.io/blob/master/img/pvalue1.png?raw=true)
  
 #### 4.2 构建假设检验
 
@@ -191,7 +193,7 @@ $\beta(\theta)=P_\theta(X \in R)$
 
 $L(\theta \mid x_1,x_2,\dots,x_n) = L(\theta \mid X) = \prod_{i=1}^nf(x_i \mid \theta)$
 
-The likelihood ratio test statistic for testing $H_0: \theta \in \Theta_0$ versus $H_1:\theta \in \Theta_0^c$ is 
+The likelihood ratio test statistic for testing $H_0: \theta \in \Theta_0$ versus $H_1:\theta \in \Theta_0^c$ is
 
 $$\lambda(x)=\frac{\sup_{\Theta_0}L(\theta \mid X)}{\sup_{\Theta}L(\theta \mid X)}$$
 
@@ -202,7 +204,7 @@ A LRT is any test that has a rejection region of the form{x:$\lambda(x)\leq c$ }
 考虑其后验分布。
 
 - 一种方法是： not reject $H_0$ if $P(\theta \in \Theta_0 \mid X) \geq P(\theta \in \Theta_0^c \mid X)$也就是前者大于0.5.
-- 另一种情况是：实验设计者一般都将错误拒绝损失大的作为原假设，所以在这种情况下，这个界限0.5可能被降低。 
+- 另一种情况是：实验设计者一般都将错误拒绝损失大的作为原假设，所以在这种情况下，这个界限0.5可能被降低。
 
 ##### 4.2.3 Union-Intersection and  Intersection-Union Tests
 
@@ -215,11 +217,11 @@ The null hypothesis is conveniently expressed as an intersection, say $H_0:\thet
 Consider testing $H_0: \theta = \theta_0 \text{ versus } H_1: \theta = \theta_1$. A test with rejection region R is a UMP level $\alpha$ test if and only if
 
 - $x \in R \text{ if } f(x\mid \theta_1) > kf(x \mid \theta_0)$  and  $x \in R^c \text{ if } f(x\mid \theta_1) < kf(x \mid \theta_0)$ for some k $\geq 0$
-- $\alpha = P_{\theta_0}(X \in R)$  
+- $\alpha = P_{\theta_0}(X \in R)$
 
 **引理**
 
-Suppose $T(x)$ is a sufficient statistic for $\theta$ and $g(t \mid \theta_i)$ is the pdf or pmf of T corresponding to $\theta_i$, i=0,1. Then any test based on T with rejection region S is a UMP level $\alpha$ test if it satisfies 
+Suppose $T(x)$ is a sufficient statistic for $\theta$ and $g(t \mid \theta_i)$ is the pdf or pmf of T corresponding to $\theta_i$, i=0,1. Then any test based on T with rejection region S is a UMP level $\alpha$ test if it satisfies
 
 - $t \in S \text{ if } g(t \mid \theta_1) > kg(t \mid \theta_0)$
 
@@ -252,7 +254,7 @@ Note:这里的分位数定义和我平常习惯的不一样。所以这里改成
 
 The result of dice is distributed by Multinomial distribution. Let $\theta = (p_1,\dots,p_6)$. $P_{\theta}(X_i = j) = p_j$. Thus the pmf of $X_i$ is $f(j \mid \theta) = p_j$. And the likelihood function is $L(\theta \mid x) = \prod_{i=1}^nf(x_i \mid \theta) = p_1^{y_1}p_2^{y_2}p_3^{y_3}p_4^{y_4}p_5^{y_5}p_6^{y_6}$ where $y_j= \text{ number } of x_1,\dots,x_n \text{ equal to j}$.
 
-Consider testing 
+Consider testing
 
 $$H_0: p_1 = p_2 = p_3 = p_4 = p_5 = p_6 \text{ versus }  H_1:H_0 \text{ is not true}$$
 
@@ -276,7 +278,7 @@ Generally, the class $C$ will be the class of all level $\alpha$ tests. It's cal
 
 ##### monotone likelihood ratio(MLR)
 
-A family of pdfs or pmfs {$g(t \mid \theta):\theta \in \Theta$} for a univariate random variable T with real-valued parameter $\theta$ has a monotone likelihood ratio(MLR) if , for every $\theta_2 > \theta_1$, $g(t\mid \theta_2) / g(t \mid \theta_1)$ is a monotone (nonincreasing or nondecreasing) function of t on {$t:g(t \mid \theta_1)>0 \text{ or } g(t\mid \theta_2) > 0$} 
+A family of pdfs or pmfs {$g(t \mid \theta):\theta \in \Theta$} for a univariate random variable T with real-valued parameter $\theta$ has a monotone likelihood ratio(MLR) if , for every $\theta_2 > \theta_1$, $g(t\mid \theta_2) / g(t \mid \theta_1)$ is a monotone (nonincreasing or nondecreasing) function of t on {$t:g(t \mid \theta_1)>0 \text{ or } g(t\mid \theta_2) > 0$}
 
 Any regular exponential family with $g(t \mid \theta) = h(t)c(\theta)e^{w(\theta)t}$ has an MLR if $w(\theta)$ is monotone.
 
@@ -301,5 +303,3 @@ A statistic $T(X_1,\dots,X_n)$ is sufficient for $\theta$ if and only if $f_n(x_
 #### 5.3 Exponential family
 
 An exponential family of distribution $f(x \mid \theta) = h(x)c(\theta)e^{\sum_{j=1}^kw_j(\theta)T_j(x)}$. Then $T(x_n) = (\sum_{i=1}^nT_1(X_i),\dots,\sum_{i=1}^nT_k(X_i))$
-
-
