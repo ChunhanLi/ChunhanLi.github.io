@@ -28,7 +28,7 @@ $S^2 = \frac{1}{n-1}\sum(X_i-\bar X)^2,~E(S^2)=\sigma^2$
 
 - $E(\chi_k^2)=k, Var(\chi_k^2)=2k$
 
-- k个独立的标准正态随机数的和的分布即为卡方k.
+- k个独立的标准正态随机数的平方和的分布即为卡方k.
 
 - 对于正态分布，$\frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1},~~ \bar X \bot S^2$
 
