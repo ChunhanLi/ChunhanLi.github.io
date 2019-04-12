@@ -264,6 +264,8 @@ $$\lambda(x) = (\frac{n}{6y_1})^{y_1}\dots(\frac{n}{6y_6})^{y_6}$$
 
 The asymptotic size $\alpha$ test rejects $H_0$ if $-2\log \lambda(x) \geq \chi^2_{5, 0.95}$. Make sure that n is large enough.
 
+或者用卡方检验的[Goodness of fit](https://fan-gong.github.io/posts/Inference_Review/index2.html)证明
+
 #### 4.3 定义
 
 ##### 4.3.1 unbiased test
