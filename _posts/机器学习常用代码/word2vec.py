@@ -179,6 +179,8 @@ import logging
 logging.basicConfig(
     format='%(asctime)s:%(levelname)s:%(message)s', level=logging.INFO)
 w2v_model = Word2Vec(doc_list, size=20, window=50, min_count=3, workers=12,sg=1,seed = 47,iter = 5)####iter默认是5
+w2v_model.save('app_w2v_size32_minc1_window500_iter10.model')
+w2v = Word2Vec.load('oppo_w2v.model')
 
 ### w2v特征合并
     #### w2v app
