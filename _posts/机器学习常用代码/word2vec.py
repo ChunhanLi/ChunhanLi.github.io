@@ -164,3 +164,40 @@ def two_w2v_features(df,groupby,target,size,window,min_count,feature):
         df_bag1[f'w2v_single_{target}_{i}'] = new_emb_martix[:,i]
         feature.append(f'w2v_single_{target}_{i}')
     return df_bag,feature,df_bag1
+
+###诈骗电话赛
+### 做w2v模型
+doc_list = train_voc_201908.groupby(['phone_no_m'])['opposite_no_m'].agg(lambda x:list(set(x)))
+for df in [train_voc_201909,train_voc_201910,train_voc_201911,train_voc_201912,train_voc_202001,\
+          train_voc_202002,train_voc_202003,test_voc_chusai,test_voc_fusai,test_voc]:
+    tmp = df.groupby(['phone_no_m'])['opposite_no_m'].agg(lambda x:list(set(x)))
+    doc_list = doc_list.append(tmp,ignore_index=True)
+doc_list = list(doc_list.reset_index()['opposite_no_m'].values)
+from gensim.models import Word2Vec
+import logging
+import logging
+logging.basicConfig(
+    format='%(asctime)s:%(levelname)s:%(message)s', level=logging.INFO)
+w2v_model = Word2Vec(doc_list, size=20, window=50, min_count=3, workers=12,sg=1,seed = 47,iter = 5)####iter默认是5
+w2v_model.save('app_w2v_size32_minc1_window500_iter10.model')
+w2v = Word2Vec.load('oppo_w2v.model')
+
+### w2v特征合并
+    #### w2v app
+    tmp_app = train_voc.groupby(['phone_no_m'])['opposite_no_m'].agg(lambda x:list(set(x)))
+    emb_matrix = []
+    for seq in tqdm(tmp_app):
+        vec = []
+        for w in seq:
+            if w in w2v:
+                vec.append(w2v.wv[w])
+        if len(vec) >0:
+            emb_matrix.append(np.mean(vec, axis=0))
+        else:
+            emb_matrix.append([0] * 20)
+    emb_matrix = np.array(emb_matrix)
+    tmp1 = pd.DataFrame()
+    tmp1['phone_no_m'] = tmp_app.index
+    for i in range(20):
+        tmp1[f'w2v_app_{i}'] = emb_matrix[:, i]
+    combine_list.append(tmp1)
