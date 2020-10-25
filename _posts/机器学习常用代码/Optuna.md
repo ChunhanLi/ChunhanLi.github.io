@@ -155,4 +155,7 @@ def objective(trial):
         overall_train_oof += torch.FloatTensor(train_oof).numpy()/(len(seed_list))
     return np.mean(overall_mean)
 
+study=optuna.create_study(direction="minimize",pruner=optuna.pruners.MedianPruner())
+study.optimize(objective,n_trials=50)
+
 ```
