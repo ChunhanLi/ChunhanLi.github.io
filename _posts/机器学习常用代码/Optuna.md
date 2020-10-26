@@ -159,3 +159,52 @@ study=optuna.create_study(direction="minimize",pruner=optuna.pruners.MedianPrune
 study.optimize(objective,n_trials=50)
 
 ```
+
+- lgb demo
+
+```python
+def objective(trial):
+    
+    params = {
+        'n_jobs': -1,
+        'random_state': 47,
+        'bagging_freq':1,
+        'learning_rate':0.01,
+        'importance_type':'gain',
+        'n_estimators':10000,
+        'num_leaves': trial.suggest_int('num_leaves', 10, 512),
+        'subsample': trial.suggest_uniform('subsample', 0.1, 1),
+        'colsample_bytree': trial.suggest_uniform('colsample_bytree', 0.1, 1),
+        'min_child_weight': trial.suggest_uniform('min_child_weight', 0.0001, 1),
+        'min_child_samples':trial.suggest_int('min_child_samples',10,500),
+        'reg_alpha': trial.suggest_uniform('reg_alpha', 0, 3),
+        'reg_lambda': trial.suggest_uniform('reg_lambda', 0, 3),
+        'min_split_gain':trial.suggest_uniform('min_split_gain', 0, 0.5)
+    }
+    
+    skf = StratifiedKFold(n_splits=5,shuffle=True,random_state=47)
+    fea_impor = 0
+    oof_train = np.zeros(X_train.shape[0])
+    y_pred = np.zeros(X_test.shape[0])
+    f1_fold_list = []
+    k = 0
+    for train_index,test_index in skf.split(X_train,y_train):
+        k+=1
+        ####print(f'{k}folds begins******************************')
+        X_train2 = X_train.iloc[train_index,:]
+        y_train2 = y_train.iloc[train_index]
+        X_test2 = X_train.iloc[test_index,:]
+        y_test2 = y_train.iloc[test_index]
+        clf = lgb.LGBMClassifier(metric = 'None',**params)
+        clf.fit(X_train2,y_train2,eval_set = [(X_train2,y_train2),(X_test2,y_test2)],\
+                eval_metric=lambda y_true,y_pred:f1_score_custom(y_true,y_pred),early_stopping_rounds=100,verbose=0)
+        tmp = clf.predict_proba(X_test2)[:,1]
+        oof_train[test_index] = tmp
+        #f1_loss = f1_score(y_test2,tmp.round())
+        #f1_fold_list.append(f1_loss)
+        #y_pred += clf.predict_proba(X_test)[:,1]/skf.n_splits
+        #fea_impor += clf.feature_importances_/skf.n_splits
+    return f1_score(y_train,oof_train.round())
+study=optuna.create_study(direction="maximize",pruner=optuna.pruners.MedianPruner())
+study.optimize(objective,n_trials=50)
+```

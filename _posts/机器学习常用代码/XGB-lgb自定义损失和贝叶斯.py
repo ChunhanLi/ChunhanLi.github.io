@@ -1,3 +1,8 @@
+#### lgb自定义损失
+def f1_score_custom(y_true,y_pred):
+    #print(y_pred,y_true.shape)
+    y_pred = y_pred.round()
+    return 'f1', f1_score(y_true,y_pred), True
 #### xgb自定义损失 注意f1_score的负号; 
 clf = xgb.XGBClassifier(n_estimators=50, random_state=47,learning_rate=0.06,\
                             importance_type = 'gain',n_jobs = -1,metric='None')
